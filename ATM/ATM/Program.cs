@@ -10,8 +10,20 @@ namespace ATM
     {
         static void Main(string[] args)
         {
+            try
+            {
             StartSequence();
             Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Program has finished running.");
+                Console.ReadLine();
+            }
         }
 
         private static void StartSequence()
@@ -20,6 +32,8 @@ namespace ATM
             bool atmOn = true;
             while (atmOn)
             {
+                try
+                {
                 DisplayMenu();
                 switch (Console.ReadLine())
                 {
@@ -35,10 +49,9 @@ namespace ATM
                             balance = AddToBalance(balance, Convert.ToDouble(deposit));
                             break;
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
-                            Console.WriteLine($"Error: {e.Message}");
-                            break;
+                                throw;
                         }
                     case "3":
                         Console.WriteLine("How much would you like to withdraw?");
@@ -49,19 +62,22 @@ namespace ATM
                             balance = WithdrawFromBalance(balance, Convert.ToDouble(withdrawal));
                             break;
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
-                            Console.WriteLine($"Error: {e.Message}");
-                            break;
+                                throw;
                         }
                     case "4":
                         Console.WriteLine("Thanks for banking with Shitake Bank!");
-                        Console.ReadLine();
-                        Environment.Exit(0);
+                            atmOn = false;
                         break;
                     default:
                         Console.WriteLine("Please enter a valid menu option.");
                         break;
+                }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Error: {e.Message}");
                 }
             }
         }

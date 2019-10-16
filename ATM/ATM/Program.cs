@@ -25,7 +25,9 @@ namespace ATM
                 Console.ReadLine();
             }
         }
-
+        /// <summary>
+        /// Runs main sequence for ATM. Displays menu and picks options based on user input.
+        /// </summary>
         private static void StartSequence()
         {
             double balance = 5000.00;
@@ -81,7 +83,9 @@ namespace ATM
                 }
             }
         }
-
+        /// <summary>
+        /// Displays menu options in console.
+        /// </summary>
         public static void DisplayMenu()
         {
             Console.WriteLine("\n\nWelcome to Shitake Bank!");
@@ -91,17 +95,32 @@ namespace ATM
             Console.WriteLine("3) Withdrawal");
             Console.WriteLine("4) Exit");
         }
-
+        /// <summary>
+        /// Takes in the current balance as a double and writes to the console the balance. Returns the balance.
+        /// </summary>
+        /// <param name="balance">Takes in current balance as a double.</param>
+        /// <returns>Returns balance as a double.</returns>
         public static double ViewBalance(double balance)
         {
             Console.WriteLine($"Your current balance: ${balance}");
             return balance;
         }
-
+        /// <summary>
+        /// Takes in a balance and an amount to add. Adds amount to balance and returns a new balance.
+        /// </summary>
+        /// <param name="balance">Takes in current balance as a double.</param>
+        /// <param name="addition">Takes in the amount to deposit as a double.</param>
+        /// <returns>Returns the updated balance as a double.</returns>
         public static double AddToBalance(double balance, double addition)
         {
             return addition + balance;
         }
+        /// <summary>
+        /// Takes in a balance and an amount to withdraw. Subtracts the amount to withdraw from the balance and returns the new balance.
+        /// </summary>
+        /// <param name="balance">Takes in a balance as a double.</param>
+        /// <param name="withdrawal">Takes in a withdrawal amount as a double.</param>
+        /// <returns>Returns updated balance as a double.</returns>
         public static double WithdrawFromBalance(double balance, double withdrawal)
         {
             if (withdrawal < balance)

@@ -20,6 +20,7 @@ namespace ATM
             bool atmOn = true;
             while (atmOn)
             {
+                DisplayMenu();
                 switch (Console.ReadLine())
                 {
                     case "1":
@@ -29,21 +30,50 @@ namespace ATM
                         Console.WriteLine("How much would you like to deposit?");
                         Console.Write("Amount: ");
                         string deposit = Console.ReadLine();
-                        balance = AddToBalance(balance, Convert.ToDouble(deposit));
-                        break;
+                        try
+                        {
+                            balance = AddToBalance(balance, Convert.ToDouble(deposit));
+                            break;
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine($"Error: {e.Message}");
+                            break;
+                        }
                     case "3":
                         Console.WriteLine("How much would you like to withdraw?");
                         Console.Write("Amount: ");
                         string withdrawal = Console.ReadLine();
-                        WithdrawFromBalance(balance, Convert.ToDouble(withdrawal));
-                        break;
+                        try
+                        {
+                            balance = WithdrawFromBalance(balance, Convert.ToDouble(withdrawal));
+                            break;
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine($"Error: {e.Message}");
+                            break;
+                        }
                     case "4":
                         Console.WriteLine("Thanks for banking with Shitake Bank!");
                         Console.ReadLine();
                         Environment.Exit(0);
                         break;
+                    default:
+                        Console.WriteLine("Please enter a valid menu option.");
+                        break;
                 }
             }
+        }
+
+        public static void DisplayMenu()
+        {
+            Console.WriteLine("\n\nWelcome to Shitake Bank!");
+            Console.WriteLine("Options:");
+            Console.WriteLine("1) View Balance");
+            Console.WriteLine("2) Deposit");
+            Console.WriteLine("3) Withdrawal");
+            Console.WriteLine("4) Exit");
         }
 
         public static double ViewBalance(double balance)
@@ -60,7 +90,7 @@ namespace ATM
         {
             if (withdrawal < balance)
             {
-            return balance - withdrawal;
+                return balance - withdrawal;
             }
             else
             {

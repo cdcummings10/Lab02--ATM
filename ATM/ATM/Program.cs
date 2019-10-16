@@ -33,6 +33,9 @@ namespace ATM
                         break;
                     case "3":
                         Console.WriteLine("How much would you like to withdraw?");
+                        Console.Write("Amount: ");
+                        string withdrawal = Console.ReadLine();
+                        WithdrawFromBalance(balance, Convert.ToDouble(withdrawal));
                         break;
                     case "4":
                         Console.WriteLine("Thanks for banking with Shitake Bank!");
@@ -40,18 +43,30 @@ namespace ATM
                         Environment.Exit(0);
                         break;
                 }
-                }
             }
+        }
 
-            public static double ViewBalance(double balance)
+        public static double ViewBalance(double balance)
+        {
+            Console.WriteLine($"Your current balance: ${balance}");
+            return balance;
+        }
+
+        public static double AddToBalance(double balance, double addition)
+        {
+            return addition + balance;
+        }
+        public static double WithdrawFromBalance(double balance, double withdrawal)
+        {
+            if (withdrawal < balance)
             {
-                Console.WriteLine($"Your current balance: ${balance}");
+            return balance - withdrawal;
+            }
+            else
+            {
+                Console.WriteLine($"Sorry, current funds of ${balance} cannot support withdrawal of ${withdrawal}.");
                 return balance;
-            }
-
-            public static double AddToBalance(double balance, double addition)
-            {
-                return addition + balance;
             }
         }
     }
+}

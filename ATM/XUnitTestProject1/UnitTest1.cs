@@ -25,7 +25,26 @@ namespace XUnitTestProject1
         [InlineData(4989.01, 10.99)]
         public void ReturnNewBalanceAfterAddition(double balance, double addition)
         {
-            Assert.Equal(5000.00, AddToBalance(balance, addition));
+            double endValue = balance + addition;
+            Assert.Equal(endValue, AddToBalance(balance, addition));
+        }
+
+        [Fact]
+        public void ReturnCorrectBalanceAfterAddition()
+        {
+            Assert.NotEqual(5000.00, AddToBalance(5000.00, 12.99));
+        }
+
+        [Fact]
+        public void ReturnNewBalanceAfterWithdrawal()
+        {
+            Assert.Equal(5000.00, WithdrawFromBalance(5500.00, 500.00));
+        }
+
+        [Fact]
+        public void ReturnBalanceCannotBeNegative()
+        {
+            Assert.NotEqual(-500, WithdrawFromBalance(5000.00, 5500.00));
         }
     }
 }

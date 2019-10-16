@@ -113,7 +113,15 @@ namespace ATM
         /// <returns>Returns the updated balance as a double.</returns>
         public static double AddToBalance(double balance, double addition)
         {
+            if (addition > 0)
+            {
             return addition + balance;
+            }
+            else
+            {
+                Console.WriteLine("Please enter a positive value. Returning to main menu.");
+                return balance;
+            }
         }
         /// <summary>
         /// Takes in a balance and an amount to withdraw. Subtracts the amount to withdraw from the balance and returns the new balance.
